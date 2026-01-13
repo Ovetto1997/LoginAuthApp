@@ -1,14 +1,25 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("kapt") version "2.3.0"
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization") version "2.0.21"
+    id("androidx.navigation.safeargs") version "2.7.7" // Added the version
+
+
+
+
 }
+
 
 android {
     namespace = "luca.carlino.loginauthapp"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "luca.carlino.loginauthapp"
@@ -20,22 +31,34 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    flavorDimensions += "environment"
+    flavorDimensions += "env"
     productFlavors {
         create("mock"){
-            dimension = "environment"
+            dimension = "env"
             applicationIdSuffix = ".mock"
             versionNameSuffix = "-mock"
+            buildConfigField("String", "MOCK_USER", "\"demo\"")
+            buildConfigField("String", "MOCK_PASS", "\"demo\"")
+
+
+
         }
         create("production") {
-            dimension = "environment"
+            dimension = "env"
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
+
+            buildConfigField("String", "PROD_USER", "\"prod\"")
+            buildConfigField("String", "PROD_PASS", "\"prod123\"")
+
+
+
         }
 
     }
 
     buildTypes {
+        debug { isMinifyEnabled = false }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -48,12 +71,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
     }
     buildFeatures {
         compose = true
         dataBinding = true
+        viewBinding = true
 
     }
 }
@@ -75,4 +101,30 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+
+    kapt("groupId:artifactId:version")
+
+    implementation("com.google.dagger:dagger-compiler:2.51.1")
+
+
+
+    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
+    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    val room_version = "2.8.4"
+    implementation("androidx.room:room-ktx:${room_version}")
+    implementation("androidx.room:room-runtime:${room_version}")
+    ksp("androidx.room:room-compiler:$room_version")
+
+    implementation("com.google.dagger:hilt-android:2.57.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+
+    val nav_version = "2.9.6"
+
+    // Views/Fragments integration
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
 }

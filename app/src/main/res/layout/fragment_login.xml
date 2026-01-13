@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <data>
+        <variable
+            name="viewModel"
+            type="luca.carlino.loginauthapp.Login" />
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+    </data>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="32dp" />
+
+            <!-- Username Input -->
+            <EditText
+                android:id="@+id/username_input"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@={viewModel.username}"
+                android:hint="Username"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_background"
+                android:elevation="4dp" />
+
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@={viewModel.password}"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/edit_text_background"
+                android:elevation="4dp" />
+
+            <!-- Error Message -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.errorMessage}"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="@{viewModel.errorMessage != null ? View.VISIBLE : View.GONE}"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Login Button -->
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Login"
+                android:textSize="18sp"
+                android:enabled="@{!viewModel.isLoading}" />
+
+
+        </LinearLayout>
+
+    </layout>
+
+
+
