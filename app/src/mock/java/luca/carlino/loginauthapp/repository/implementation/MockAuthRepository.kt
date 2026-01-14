@@ -3,7 +3,7 @@ package luca.carlino.loginauthapp.repository.implementation
 import kotlinx.coroutines.delay
 import luca.carlino.loginauthapp.data.AuthRemoteDatasource
 import luca.carlino.loginauthapp.data.AuthRemoteResult
-import luca.carlino.loginauthapp.data.repo.abstraction.AuthRepository
+import luca.carlino.loginauthapp.data.repository.AuthRepository
 import luca.carlino.loginauthapp.domain.models.AuthResult
 import javax.inject.Inject
 
