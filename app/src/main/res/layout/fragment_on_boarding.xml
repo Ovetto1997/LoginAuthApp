@@ -15,47 +15,76 @@
             android:id="@+id/preview"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:contentDescription="Selected avatar preview"
             app:drawableByName="@{vm.avatarResName}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/avatarCat"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/avatarLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cat"
-            android:layout_marginTop="12dp"
+            android:text="Select your avatar:"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@id/preview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/avatarDog"
+        <LinearLayout
+            android:id="@+id/avatarContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Dog"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/avatarCat"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/avatarLabel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/avatarFox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Fox"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/avatarDog"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <ImageView
+                android:id="@+id/avatarDog"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/avatar_dog"
+                android:contentDescription="Dog avatar"
+                android:padding="4dp"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <ImageView
+                android:id="@+id/avatarCat"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/avatar_cat"
+                android:contentDescription="Cat avatar"
+                android:padding="4dp"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <ImageView
+                android:id="@+id/avatarFox"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/avatar_fox"
+                android:contentDescription="Fox avatar"
+                android:padding="4dp"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nickLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/avatarFox"
+            app:layout_constraintTop_toBottomOf="@id/avatarContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

@@ -33,12 +33,13 @@ class OnBoardingViewModel @Inject constructor(
         val profile = ProfileModel(
             nickName = nickName.value.orEmpty().trim().ifBlank { "Friend" },
             fullName = fullName.value.orEmpty().trim().ifBlank { "Anonymous" },
-            age = (age.value ?: 19).coerceIn(1,120),
-            avatarResName = avatarResName.value.orEmpty().ifBlank { "avatar" },
+            age = (age.value ?: 19).coerceIn(1, 120),
+            avatarResName = avatarResName.value.orEmpty().ifBlank { "avatar" }
         )
 
-        viewModelScope.launch { userRepository.setProfile(profile)
-        _goHome.value = Event(Unit)
+        viewModelScope.launch {
+            userRepository.setProfile(profile)
+            _goHome.value = Event(Unit)
         }
     }
 
