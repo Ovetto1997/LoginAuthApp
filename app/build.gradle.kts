@@ -102,7 +102,7 @@ dependencies {
 
 
 
-    ksp("com.google.dagger:dagger-compiler:2.57.2")
+    ksp("com.google.dagger:dagger-compiler:2.51.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
@@ -112,13 +112,13 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
-    val room_version = "2.8.4"
+    val room_version = "2.6.1"
     implementation("androidx.room:room-ktx:${room_version}")
     implementation("androidx.room:room-runtime:${room_version}")
     ksp("androidx.room:room-compiler:$room_version")
 
-    implementation("com.google.dagger:hilt-android:2.57.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.57.2")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
     val nav_version = "2.9.6"
 
@@ -126,7 +126,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")
 
-    val lifecycle_version = "2.10.0"
+    val lifecycle_version = "2.8.4"
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
