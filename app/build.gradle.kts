@@ -5,14 +5,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("kapt") version "2.3.0"
+
+    kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
-    kotlin("plugin.serialization") version "2.0.21"
-    id("androidx.navigation.safeargs") version "2.7.7" // Added the version
-
-
-
+    id("androidx.navigation.safeargs.kotlin")
 
 }
 
@@ -37,8 +34,7 @@ android {
             dimension = "env"
             applicationIdSuffix = ".mock"
             versionNameSuffix = "-mock"
-            buildConfigField("String", "MOCK_USER", "\"demo\"")
-            buildConfigField("String", "MOCK_PASS", "\"demo\"")
+
 
 
 
@@ -48,8 +44,7 @@ android {
             applicationIdSuffix = ".prod"
             versionNameSuffix = "-prod"
 
-            buildConfigField("String", "PROD_USER", "\"prod\"")
-            buildConfigField("String", "PROD_PASS", "\"prod123\"")
+
 
 
 
@@ -70,20 +65,19 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+            freeCompilerArgs.add("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
         }
     }
     buildFeatures {
-        compose = true
+
         dataBinding = true
         viewBinding = true
 
-    }
-    kotlinOptions {
-        freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
     }
 }
 
@@ -106,10 +100,11 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
-    kapt("groupId:artifactId:version")
 
-    implementation("com.google.dagger:dagger-compiler:2.51.1")
 
+    ksp("com.google.dagger:dagger-compiler:2.57.2")
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
 
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
@@ -122,12 +117,18 @@ dependencies {
     implementation("androidx.room:room-runtime:${room_version}")
     ksp("androidx.room:room-compiler:$room_version")
 
-    implementation("com.google.dagger:hilt-android:2.57.1")
-    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    ksp("com.google.dagger:hilt-android-compiler:2.57.2")
 
     val nav_version = "2.9.6"
 
-    // Views/Fragments integration
+
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    val lifecycle_version = "2.10.0"
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_version}")
 }

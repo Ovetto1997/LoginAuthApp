@@ -1,34 +1,24 @@
 package luca.carlino.loginauthapp.repository.implementation
 
-import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
-import luca.carlino.loginauthapp.R
+import luca.carlino.loginauthapp.data.AuthRemoteDatasource
+import luca.carlino.loginauthapp.data.AuthRemoteResult
 import luca.carlino.loginauthapp.data.repo.abstraction.AuthRepository
 import luca.carlino.loginauthapp.domain.models.AuthResult
 import javax.inject.Inject
 
 class MockAuthRepository @Inject constructor(
-    @ApplicationContext private val context: Context
+    private val remote: AuthRemoteDatasource
 ): AuthRepository {
 
-    override suspend fun login(username: String, password: String): AuthResult {
-        delay(250)
-        val demoPass = context.getString(R.string.auth_expected_password)
-
-
-        val allowedUsers = setOf(
-            context.getString(R.string.auth_expected_username),
-            "test",
-            "qa"
-        )
-
-        val userOk = username in allowedUsers
-        val passwordOk = password == demoPass
-        return if (userOk && passwordOk) AuthResult.Success
-        else AuthResult.Failure(
-            usernameError = if (!userOk) "Mock: user not in allowlist" else null,
-            passwordError = if (!passwordOk) "Mock: wrong password" else null
-        )
+    override suspend fun login(email: String, password: String): AuthResult {return when (val r = remote.login(email, password)) {
+        is AuthRemoteResult.Ok -> AuthResult.Success
+        is AuthRemoteResult.Error -> when (r.code) {
+            AuthRemoteResult.Code.EMAIL_MISMATCH ->
+                AuthResult.Failure(emailError = "Mock: email mismatch")
+            AuthRemoteResult.Code.PASSWORD_INCORRECT ->
+                AuthResult.Failure(passwordError = "Mock: wrong password")//clear the error TODO()
+        }
+    }
     }
 }

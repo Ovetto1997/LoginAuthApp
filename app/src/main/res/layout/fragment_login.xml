@@ -1,87 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable
-            name="viewModel"
-            type="luca.carlino.loginauthapp.Login" />
-
-        <import type="android.view.View"/>
-
-        <variable
-            name="isLoading"
-            type="Boolean" />
-
+        <variable name="vm" type="luca.carlino.loginauthapp.ui.presentation.login.LoginViewModel"/>
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorText="@{vm.emailError}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center">
-
-            <TextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginBottom="32dp" />
+                android:layout_height="48dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:text="@={vm.email}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Username Input -->
-            <EditText
-                android:id="@+id/username_input"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="@={viewModel.username}"
-                android:hint="Username"
-                android:inputType="text"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/edit_text_background"
-                android:elevation="4dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:errorText="@{vm.passwordError}"
+            app:layout_constraintTop_toBottomOf="@id/emailLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- Password Input -->
-            <EditText
-                android:id="@+id/password_input"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="@={viewModel.password}"
+                android:layout_height="48dp"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/edit_text_background"
-                android:elevation="4dp" />
+                android:text="@={vm.password}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Error Message -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.errorMessage}"
-                android:textColor="@android:color/holo_red_dark"
-                android:visibility="@{viewModel.errorMessage != null ? View.VISIBLE : View.GONE}"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Login Button -->
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Login"
-                android:textSize="18sp"
-                android:enabled="@{!viewModel.isLoading}" />
-
-
-        </LinearLayout>
-
-    </layout>
-
-
-
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/passLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

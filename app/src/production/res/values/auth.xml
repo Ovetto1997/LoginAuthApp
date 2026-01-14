@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="auth_expected_username">demo</string>
-    <string name="auth_expected_password">demo</string>
+    <string name="expected_email">prod@example.com</string>
+    <string name="expected_password">prod123</string>
 </resources>
