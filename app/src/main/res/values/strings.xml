@@ -2,4 +2,11 @@
     <string name="app_name">LoginAuthApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    <!-- Avatar Selection -->
+    <string name="avatar_selection_label">Select your avatar:</string>
+    <string name="avatar_preview_desc">Selected avatar preview</string>
+    <string name="avatar_dog_desc">Dog avatar</string>
+    <string name="avatar_cat_desc">Cat avatar</string>
+    <string name="avatar_fox_desc">Fox avatar</string>
 </resources>

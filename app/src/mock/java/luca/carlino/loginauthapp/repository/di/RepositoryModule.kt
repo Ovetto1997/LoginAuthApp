@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import luca.carlino.loginauthapp.data.AuthRemoteDatasource
-import luca.carlino.loginauthapp.data.repo.abstraction.AuthRepository
-import luca.carlino.loginauthapp.data.repo.abstraction.UserRepository
+import luca.carlino.loginauthapp.data.repository.AuthRepository
+import luca.carlino.loginauthapp.data.repository.UserRepository
 import luca.carlino.loginauthapp.repository.MockRemoteDatasource
 import luca.carlino.loginauthapp.repository.implementation.MockAuthRepository
 import luca.carlino.loginauthapp.repository.implementation.MockUserRepository
