@@ -10,10 +10,7 @@ import luca.carlino.loginauthapp.data.repository.UserRepository
 import luca.carlino.loginauthapp.domain.models.ProfileModel
 import javax.inject.Inject
 
-data class HomeUiState(
-    val nickname: String,
-    val avatarRes: String
-)
+
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -31,3 +28,8 @@ class HomeViewModel @Inject constructor(
     }
     }
 }
+
+data class HomeUiState(
+    val nickname: String,
+    val avatarRes: String
+)

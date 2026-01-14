@@ -4,7 +4,7 @@ sealed class AuthResult {
     data object Success : AuthResult()
     data class Failure(
         val passwordError: String? = null,
-        val emailError: String
+        val emailError: String? = null
     ) : AuthResult()
 
 }

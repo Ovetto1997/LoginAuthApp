@@ -2,8 +2,6 @@ package luca.carlino.loginauthapp.domain.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("errorText")
@@ -11,6 +9,7 @@ fun errorText(layout: TextInputLayout, error: String?) {
     layout.error = error
     layout.isErrorEnabled = !error.isNullOrBlank()
 }
+
 
 @BindingAdapter("drawableByName")
 fun drawableByName(imageView: ImageView, resName: String?) {
@@ -22,4 +21,5 @@ fun drawableByName(imageView: ImageView, resName: String?) {
         return imageView.setImageResource(resId)
     }
 }
+
 
