@@ -22,11 +22,11 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.mockito.kotlin.any
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -131,6 +131,26 @@ class LoginViewModelTest {
         val event = viewModel.goNext.getOrAwaitValue()
 
         assertNotNull(event.getContentIfNotHandled())
+
+    }
+
+    @Test
+    fun onLogicClicked_email_Mismatch_errorRepo() = runTest() {
+        viewModel.email.value = "wrong@example.com"
+        viewModel.password.value = "password123"
+
+        whenever(authRepository.login(org.mockito.kotlin.any(), org.mockito.kotlin.any())).thenReturn(
+            AuthResult.Failure(
+                emailError = "Email mismatch",
+                passwordError = null
+            )
+        )
+
+        viewModel.onLoginClicked()
+
+        assertEquals("Email mismatch", viewModel.emailError.value)
+        assertNull(viewModel.passwordError.value)
+
 
     }
     private fun <T> LiveData<T>.getOrAwaitValue(): T {
