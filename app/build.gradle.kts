@@ -130,4 +130,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle_version}")
+
+
+    // Standard JUnit 4 framework for unit testing
+    testImplementation("junit:junit:4.13.2")
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
+// Optional: Mockito (if you need to mock objects)
+    testImplementation("org.mockito:mockito-core:5.8.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test: 1.7.3")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
